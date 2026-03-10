@@ -1,13 +1,13 @@
 ---
 name: vault-setup
-description: Interactive Obsidian vault configurator. Two rounds of 4 questions each (8 total), then creates vault structure and vault-context.md.
+description: Interactive Obsidian vault configurator. Two rounds of 4 questions, shows a vault preview for confirmation, then builds the vault structure directly using the Obsidian CLI — no manual folder selection needed.
 ---
 
 # Vault Setup — Interactive Obsidian Configurator
 
-Run from INSIDE the Obsidian vault folder.
+Run from INSIDE the Obsidian vault folder (or any folder you want to become the vault).
 
-**CRITICAL: Exactly TWO AskUserQuestion calls. Each call has exactly 4 questions shown as tabs. Never more, never fewer calls.**
+**TWO AskUserQuestion calls (4 tabs each), then a confirmation, then build.**
 
 ---
 
@@ -50,9 +50,9 @@ AskUserQuestion([
     header: "Scope",
     options: [
       { label: "Work only", description: "Business, clients, projects — keep it professional" },
-      { label: "Work + personal goals", description: "Include priorities and things I'm working on outside work too" },
+      { label: "Work + personal goals", description: "Include priorities and things outside work too" },
       { label: "Full life OS", description: "One place for everything — work, personal, health, finance, ideas" },
-      { label: "Start work, add later", description: "Work first, expand when I'm ready" }
+      { label: "Start work, add later", description: "Work first, expand when ready" }
     ]
   }
 ])
@@ -70,12 +70,12 @@ AskUserQuestion([
     options: [
       { label: "People & follow-ups", description: "Things I said I'd do with team or clients that got forgotten" },
       { label: "Decisions & reasoning", description: "I make decisions but lose the context and why behind them" },
-      { label: "Ideas & opportunities", description: "Good ideas I had but never acted on because I forgot them" },
+      { label: "Ideas & opportunities", description: "Good ideas I had but never acted on" },
       { label: "Projects & deadlines", description: "Things in progress that stall because I lost track" }
     ]
   },
   {
-    question: "Do you have existing files to import into your vault?",
+    question: "Do you have existing files to import?",
     header: "Existing files",
     options: [
       { label: "Yes — a lot", description: "PDFs, Word docs, slides, old notes — years of stuff" },
@@ -95,12 +95,12 @@ AskUserQuestion([
     ]
   },
   {
-    question: "What do you most want Claude Code to do in this vault day-to-day?",
+    question: "What do you most want Claude Code to do in this vault?",
     header: "Daily goal",
     options: [
-      { label: "Faster decisions", description: "Surface the right context so I can decide quickly and move on" },
-      { label: "Track everything", description: "Nothing falls through — people, projects, commitments, ideas" },
-      { label: "Write in my voice", description: "Use my past notes to match my tone when drafting anything" },
+      { label: "Faster decisions", description: "Surface the right context so I can decide quickly" },
+      { label: "Track everything", description: "Nothing falls through — people, projects, commitments" },
+      { label: "Write in my voice", description: "Use my past notes to match my tone when drafting" },
       { label: "All of the above", description: "I want the full compounding system" }
     ]
   }
@@ -109,19 +109,67 @@ AskUserQuestion([
 
 ---
 
-## GENERATION — After both rounds
+## PREVIEW — Show the proposed vault before building
 
-### Step 1: Create folder structure
+After both rounds, show the proposed structure as a formatted preview. Do NOT create anything yet.
 
-Based on role:
-- Business Owner → `mkdir -p inbox daily people operations decisions projects archive scripts .claude/skills/daily .claude/skills/tldr .claude/skills/standup`
-- Developer → `mkdir -p inbox daily projects research clients archive scripts .claude/skills/daily .claude/skills/tldr .claude/skills/project`
-- Consultant → `mkdir -p inbox daily clients projects research archive scripts .claude/skills/daily .claude/skills/tldr .claude/skills/client`
-- Creator → `mkdir -p inbox daily content research clients archive scripts .claude/skills/daily .claude/skills/tldr .claude/skills/content`
+Output exactly this format:
 
-If scope includes personal/full life OS, also: `mkdir -p personal goals`
+```
+Here's your vault — ready to build when you are.
 
-### Step 2: Write vault-context.md
+📁 [vault name based on current directory]
+├── inbox/          Drop zone — everything new lands here first
+├── daily/          Daily brain dumps and quick captures  
+├── [role folder 1]/  [one line purpose]
+├── [role folder 2]/  [one line purpose]
+├── [role folder 3]/  [one line purpose]
+├── projects/       Active work with status and next actions
+├── archive/        Completed work — never deleted, just moved
+└── scripts/        File processing tools
+
+Slash commands that will be installed:
+  /daily    — start your day with vault context
+  /tldr     — save any session to the right folder
+  /[role]   — [role-specific command description]
+
+vault-context.md will be written here — Claude reads it every session
+to know who you are. No re-explaining yourself ever again.
+
+Type "build it" to create this now, or tell me what to change.
+```
+
+Wait for the user to confirm ("build it", "yes", "go", "looks good", etc.) or request changes.
+If they request changes, adjust the structure and show the preview again.
+
+---
+
+## BUILD — Only after confirmation
+
+### Step 1: Create folder structure via bash
+
+```bash
+mkdir -p inbox daily [role-specific folders] projects archive scripts \
+  .claude/skills/daily .claude/skills/tldr .claude/skills/[role-command]
+```
+
+Role-specific folders:
+- Business Owner → `people/ operations/ decisions/`
+- Developer → `research/ clients/`
+- Consultant → `clients/ research/`
+- Creator → `content/ research/ clients/`
+
+If scope includes personal → also `personal/` and `goals/`
+
+### Step 2: Open the vault in Obsidian via CLI
+
+```bash
+open -a Obsidian "$(pwd)"
+```
+
+This opens the current folder directly as an Obsidian vault. No manual folder selection.
+
+### Step 3: Write vault-context.md
 
 ```markdown
 # About Me
@@ -130,36 +178,36 @@ If scope includes personal/full life OS, also: `mkdir -p personal goals`
 
 # My Vault Structure
 
-[Actual folder tree just created, one-line purpose per folder]
+[Actual folder tree, one-line purpose per folder]
 
 # How I Work
 
 - Capture style: [from answer]
-- Biggest pain point: [from answer]
+- Biggest pain point: [from answer]  
 - Decision frequency: [from answer]
 - Scope: [work only / work + personal / full life OS]
 
 # Context Rules
 
 When I mention a decision → check decisions/ for related past decisions first
-When I mention a person, client, or project → look in [relevant folder] for their context
+When I mention a person, client, or project → look in [relevant folder] first
 When I ask you to write something → read recent daily/ notes to match my voice
-When I drop something in inbox/ → ask if I want it sorted now or later
+When I drop a file in inbox/ → ask if I want it sorted now or later
 ```
 
-### Step 3: Write skill files
+### Step 4: Write skill files
 
-**`.claude/skills/daily/SKILL.md`** — read today's note or create one, check inbox, surface top 3 priorities, ask "What are we working on?"
+**`.claude/skills/daily/SKILL.md`** — read today's note or create one, check inbox/, surface top 3 priorities, ask "What are we working on?"
 
 **`.claude/skills/tldr/SKILL.md`** — summarize conversation, save to right folder, update memory.md
 
-Role-specific third skill:
-- Business Owner → `.claude/skills/standup/SKILL.md`: briefing across projects, decisions, people
-- Developer → `.claude/skills/project/SKILL.md`: load a project's full context and status
-- Consultant → `.claude/skills/client/SKILL.md`: load a client's full context
-- Creator → `.claude/skills/content/SKILL.md`: read content folder, calibrate voice, develop idea
+Role-specific:
+- Business Owner → `.claude/skills/standup/SKILL.md`
+- Developer → `.claude/skills/project/SKILL.md`
+- Consultant → `.claude/skills/client/SKILL.md`
+- Creator → `.claude/skills/content/SKILL.md`
 
-### Step 4: Write memory.md
+### Step 5: Write memory.md
 
 ```markdown
 # Memory
@@ -171,25 +219,22 @@ Role-specific third skill:
 [Added as Claude learns them]
 ```
 
-### Step 5: Clean output
+### Step 6: Final output — clean and short
 
 ```
-Your vault is set up.
+Done. Your vault is live in Obsidian.
 
-[actual folder tree]
+One thing left: Settings → General → Enable Command Line Interface
+(This lets other tools and scripts talk to Obsidian directly.)
 
-vault-context.md is your vault's identity file — Claude reads it to know
-who you are, how you work, and where things live. You never have to
-re-explain yourself.
-
-Add this one line to any project's CLAUDE.md to wire it up:
+Add this to any project's CLAUDE.md to pull in your vault context:
 
   At the start of every session, read [absolute path]/vault-context.md
 
-Your slash commands:
-  /daily      — start your day with vault context
-  /tldr       — save any session to the right folder
-  /[role cmd] — [one line description]
+Your slash commands work now:
+  /daily    — run this first thing tomorrow morning
+  /tldr     — run this at the end of any session
+  /[role]   — [one liner]
 
 Have files to import?
   python scripts/process_docs_to_obsidian.py ~/your-files inbox/
