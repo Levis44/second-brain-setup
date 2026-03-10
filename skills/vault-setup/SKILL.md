@@ -240,3 +240,65 @@ Have files to import?
   python scripts/process_docs_to_obsidian.py ~/your-files inbox/
   Then: "Sort everything in inbox/ into the right folders"
 ```
+
+---
+
+## STEP 7 — Context injection (after vault is built)
+
+After everything is created, ask this ONE final question:
+
+```
+AskUserQuestion([
+  {
+    question: "How do you want your vault context loaded into Claude Code sessions?",
+    header: "Context scope",
+    options: [
+      {
+        label: "Global — every session",
+        description: "Adds one line to ~/.claude/CLAUDE.md so Claude loads your vault context automatically in every Claude Code session on this machine, no matter which folder you open it from."
+      },
+      {
+        label: "Project-level — I'll choose",
+        description: "I'll give you the one line to paste into specific projects when you want your vault context available there."
+      },
+      {
+        label: "Just the vault for now",
+        description: "Claude already reads your CLAUDE.md when you run it from inside your vault. Keep it simple for now."
+      }
+    ]
+  }
+])
+```
+
+### If "Global — every session":
+
+Append this to `~/.claude/CLAUDE.md` (create the file if it doesn't exist):
+
+```markdown
+
+## My Personal Vault Context
+At the start of every session, read [absolute path to vault]/CLAUDE.md for
+context about who I am, my projects, my conventions, and how I work.
+```
+
+Confirm: "Done — your vault context will load automatically in every Claude Code session."
+
+### If "Project-level — I'll choose":
+
+Output:
+```
+When you want your vault context in a specific project, add this to that project's CLAUDE.md:
+
+  At the start of every session, read [absolute path to vault]/CLAUDE.md
+
+That's it. Claude will load your personal context automatically for that project.
+```
+
+### If "Just the vault for now":
+
+Output:
+```
+No problem. Run Claude Code from inside your vault folder and it loads automatically.
+  cd [vault path] && claude
+```
+
