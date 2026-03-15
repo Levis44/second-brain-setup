@@ -181,6 +181,18 @@ Four commands come pre-installed. More get added as you use the system.
 | `/tldr` | At the end of any session, saves a structured summary to the right folder in your vault automatically |
 | `/file-intel` | Point it at any folder — Gemini reads every file and generates Obsidian-ready summaries into your inbox |
 
+> **Important:** Slash commands only activate when Claude Code is opened from inside your vault folder. Always `cd` into your vault before running `claude`.
+>
+> ```bash
+> cd ~/second-brain   # Mac
+> cd $env:USERPROFILE\second-brain   # Windows
+> claude
+> ```
+>
+> **Want them available everywhere?** Once inside Claude Code, just ask:
+> *"Make these slash commands global so they work in any folder"*
+> Claude Code will copy the skills to `~/.claude/skills/` for you.
+
 ---
 
 ## Importing Existing Files
