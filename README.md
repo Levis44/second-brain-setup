@@ -1,24 +1,54 @@
 <div align="center">
 
 ```
-  ███████╗███████╗ ██████╗ ██████╗ ███╗   ██╗██████╗
-  ██╔════╝██╔════╝██╔════╝██╔═══██╗████╗  ██║██╔══██╗
-  ███████╗█████╗  ██║     ██║   ██║██╔██╗ ██║██║  ██║
-  ╚════██║██╔══╝  ██║     ██║   ██║██║╚██╗██║██║  ██║
-  ███████║███████╗╚██████╗╚██████╔╝██║ ╚████║██████╔╝
-  ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═════╝
+ ░▒▓███████▓▒░▒▓████████▓▒░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓███████▓▒░
+░▒▓█▓▒░      ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
+░▒▓█▓▒░      ░▒▓█▓▒░     ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
+ ░▒▓██████▓▒░░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
+       ░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
+       ░▒▓█▓▒░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
+░▒▓███████▓▒░░▒▓████████▓▒░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░
 
-  ██████╗ ██████╗  █████╗ ██╗███╗   ██╗
-  ██╔══██╗██╔══██╗██╔══██╗██║████╗  ██║
-  ██████╔╝██████╔╝███████║██║██╔██╗ ██║
-  ██╔══██╗██╔══██╗██╔══██║██║██║╚██╗██║
-  ██████╔╝██║  ██║██║  ██║██║██║ ╚████║
-  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝
+ ░▒▓███████▓▒░▒▓███████▓▒░  ░▒▓██████▓▒░░▒▓█▓▒░▒▓███████▓▒░
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
+ ░▒▓██████▓▒░░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
+       ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
+       ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
+░▒▓███████▓▒░░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░
 ```
 
-### The second brain you always wanted — but could never build. Until now.
+**An AI that already knows who you are before you type a word.**
 
-**[Obsidian](https://obsidian.md) + [Claude Code](https://claude.ai/code) · One command · Any platform**
+![macOS](https://img.shields.io/badge/macOS-✓-8A2BE2?style=flat-square) ![Windows](https://img.shields.io/badge/Windows-✓-8A2BE2?style=flat-square) ![Free](https://img.shields.io/badge/cost-free-8A2BE2?style=flat-square) ![One command](https://img.shields.io/badge/setup-one_command-8A2BE2?style=flat-square)
+
+[Obsidian](https://obsidian.md) + [Claude Code](https://claude.ai/code) · Local · Private · One command
+
+```
+  Your files (PDFs, docs, notes)
+          │
+          ▼
+  ┌───────────────────┐
+  │   Obsidian vault  │  ← plain .md files on your computer
+  │  inbox/  daily/   │
+  │  projects/  ...   │
+  └────────┬──────────┘
+           │  Claude Code reads this folder
+           ▼
+  ┌───────────────────┐
+  │   Claude Code     │  ← knows your projects, voice, context
+  │   /vault-setup    │     before you type a single word
+  │   /daily  /tldr   │
+  └───────────────────┘
+           │
+           ▼
+    AI that compounds.
+    Session 1: knows your folders.
+    Session 20: knows more about
+    your work than you consciously remember.
+```
+
+*If this saves you hours, drop a ⭐ — it helps others find it.*
 
 </div>
 
